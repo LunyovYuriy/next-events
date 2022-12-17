@@ -1,0 +1,51 @@
+@import '../../../styles/colors';
+@import '../../../styles/media';
+
+.container {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 24px;
+  background-color: $royalBlue;
+
+  @include mediaMedium() {
+    flex-direction: column;
+  }
+}
+
+.image {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+  @include mediaMedium() {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.title {
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.date {
+  margin-bottom: 8px;
+  opacity: 0.6;
+}
+
+.link {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 24px;
+  width: fit-content;
+  margin-top: auto;
+  background: $shakespeare;
+  &:hover {
+    background: darken($shakespeare, 5%);
+  }
+}

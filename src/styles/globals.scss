@@ -1,9 +1,17 @@
+@import "./colors";
+@import "./grid";
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+body {
+  background-color: $mulledWine;
+  color: $white;
 }
 
 a {
@@ -15,12 +23,16 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+ul {
+  margin: 0;
+  padding: 0;
+  li: {
+    list-style: none;
   }
-  body {
-    color: white;
-    background: black;
-  }
+}
+
+.container {
+  max-width: $extraLarge;
+  margin: 0 auto;
+  padding: 16px;
 }

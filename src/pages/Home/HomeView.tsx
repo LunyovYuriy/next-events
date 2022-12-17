@@ -1,11 +1,13 @@
-import Link from 'next/link';
+import EventsList from '../../components/EventsList/EventsList';
 import Layout from '../../layouts/Layout/Layout';
-import styles from './scss/HomeView.module.scss';
+import { getFeaturedEvents } from '../../mocks/mock-data';
 
 function HomeView() {
+  const featuredEvents = getFeaturedEvents();
+
   return (
     <Layout>
-      <h1 className={styles.title}>The Home Page</h1>
+      <EventsList list={featuredEvents} />
     </Layout>
   );
 }

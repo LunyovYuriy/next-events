@@ -1,0 +1,32 @@
+@import './_grid';
+
+/*
+  $extraLarge: 1200px;
+  $large: 992px;
+  $medium: 768px;
+  $small: 576px;
+*/
+
+@mixin mediaExtraLarge() {
+  @media screen and (max-width: $extraLarge) {
+    @content
+  }
+};
+
+@mixin mediaLarge() {
+  @media screen and (max-width: $large) {
+    @content
+  }
+};
+
+@mixin mediaMedium() {
+  @media screen and (max-width: $medium) {
+    @content
+  }
+};
+
+@mixin mediaSmall() {
+  @media screen and (max-width: $small) {
+    @content
+  }
+}

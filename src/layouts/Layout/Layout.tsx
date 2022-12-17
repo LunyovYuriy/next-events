@@ -1,10 +1,13 @@
+import classNames from 'classnames';
 import Link from 'next/link';
 import ILayout from './interfaces/ILayout';
 import styles from './scss/Layout.module.scss';
 
-function Layout({ children }: ILayout) {
+function Layout({ children, containerClass }: ILayout) {
+  const containerClassNames = classNames('container', containerClass);
+
   return (
-    <div className={styles.container}>
+    <>
       <ul className={styles.navigation}>
         <li>
           <Link href="/">Home</Link>
@@ -13,8 +16,8 @@ function Layout({ children }: ILayout) {
           <Link href="/events">Events</Link>
         </li>
       </ul>
-      {children}
-    </div>
+      <div className={containerClassNames}>{children}</div>
+    </>
   );
 }
 

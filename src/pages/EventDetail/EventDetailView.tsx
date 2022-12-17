@@ -1,5 +1,5 @@
 function EventDetailView() {
-  return <div>Event</div>;
+  return <div>Event page</div>;
 }
 
 export default EventDetailView;
