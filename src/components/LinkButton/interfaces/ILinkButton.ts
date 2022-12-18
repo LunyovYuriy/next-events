@@ -1,6 +1,7 @@
 import React from 'react';
-
 export default interface ILinkButton {
   url: string;
-  children: React.ReactNode;
+  label: string;
+  iconRight?: React.ReactNode;
+  className?: string;
 }

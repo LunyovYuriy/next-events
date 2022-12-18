@@ -1,5 +1,10 @@
 import Image from 'next/image';
 import LinkButton from '../LinkButton/LinkButton';
+import IconArrowRight from '../svgIcons/IconArrowRight';
+import IconDate from '../svgIcons/IconDate';
+import IconLocation from '../svgIcons/IconLocation';
+import EventItemDate from './components/EventItemDate';
+import EventItemLocation from './components/EventItemLocation';
 import IEventItem from './interfaces/IEventItem';
 import classes from './scss/EventItem.module.scss';
 
@@ -24,10 +29,14 @@ function EventItem({ event }: IEventItem) {
       />
       <div className={classes.infoContainer}>
         <h3 className={classes.title}>{title}</h3>
-        <time className={classes.date}>{readableDate}</time>
-        <address className={classes.location}>{formattedLocation}</address>
+        <EventItemDate date={readableDate} />
+        <EventItemLocation text={formattedLocation} />
         <p className={classes.description}>{description}</p>
-        <LinkButton url={`/events/${id}`}>Explore Event</LinkButton>
+        <LinkButton
+          url={`/events/${id}`}
+          label="Explore Event"
+          iconRight={<IconArrowRight width={20} height={20} />}
+        />
       </div>
     </li>
   );
