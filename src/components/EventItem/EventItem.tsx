@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import LinkButton from '../LinkButton/LinkButton';
 import IEventItem from './interfaces/IEventItem';
 import classes from './scss/EventItem.module.scss';
 
@@ -27,9 +28,7 @@ function EventItem({ event }: IEventItem) {
         <time className={classes.date}>{readableDate}</time>
         <address className={classes.location}>{formattedLocation}</address>
         <p className={classes.description}>{description}</p>
-        <Link href={`/events/${id}`} className={classes.link}>
-          Explore event
-        </Link>
+        <LinkButton url={`/events/${id}`} />
       </div>
     </li>
   );

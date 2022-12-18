@@ -41,15 +41,3 @@
 .location {
   white-space: pre-line;
 }
-
-.link {
-  display: flex;
-  align-items: flex-start;
-  padding: 16px 24px;
-  width: fit-content;
-  margin-top: auto;
-  background: $shakespeare;
-  &:hover {
-    background: darken($shakespeare, 5%);
-  }
-}
