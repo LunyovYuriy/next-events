@@ -6,9 +6,7 @@ function HomeView() {
   const featuredEvents = getFeaturedEvents();
 
   return (
-    <Layout>
       <EventsList list={featuredEvents} />
-    </Layout>
   );
 }
 
