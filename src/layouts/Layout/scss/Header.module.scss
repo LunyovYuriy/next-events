@@ -1,0 +1,12 @@
+@import "../../../styles/colors";
+
+.topContainer {
+  background: $royalBlue;
+}
+
+.innerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 16px;
+}
