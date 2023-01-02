@@ -7,6 +7,8 @@
   width: fit-content;
   margin-top: auto;
   background: $shakespeare;
+  border: none;
+  outline: none;
   transition: all .2s;
   &:hover {
     background: darken($shakespeare, 5%);
@@ -15,6 +17,8 @@
 
 .label {
   line-height: 30px;
+  color: $white;
+  font-size: 16px;
 }
 
 .iconContainer {

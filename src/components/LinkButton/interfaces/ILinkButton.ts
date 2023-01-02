@@ -1,4 +1,3 @@
-import React from 'react';
 export default interface ILinkButton {
   url: string;
   label: string;
