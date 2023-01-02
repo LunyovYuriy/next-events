@@ -30,6 +30,7 @@ function EventsSearch({onSearch}: IEventSearch) {
           onChange={(event) => setYearValue(event.target.value)}
           className={classes.formSelect}
         >
+          <option value="2023">2023</option>
           <option value="2022">2022</option>
           <option value="2021">2021</option>
         </select>
