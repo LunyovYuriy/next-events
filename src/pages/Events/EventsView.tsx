@@ -1,11 +1,10 @@
 import EventsList from '../../components/EventsList/EventsList';
 import EventsSearch from './components/EventsSearch';
-import { getAllEvents } from '../../mocks/mock-data';
 import { useRouter } from 'next/router';
+import IEvents from './interfaces/IEvents';
 
-function EventsView() {
+function EventsView({allEvents}: IEvents) {
   const router = useRouter();
-  const events = getAllEvents();
 
   const findEventsHandler = (year: string, month: string) => {
     const fullPath = `/events/${year}/${month}`;
@@ -16,7 +15,7 @@ function EventsView() {
   return (
     <div>
       <EventsSearch onSearch={findEventsHandler} />
-      <EventsList list={events} />
+      <EventsList list={allEvents} />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { API_URL } from '../constants/api';
 import IEvent from '../interfaces/IEvent';
 
-export async function getAllEvents(queryParams: string): Promise<IEvent[]> {
+export async function getAllEvents(queryParams?: string): Promise<IEvent[]> {
   const response = await fetch(
     `${API_URL}/events.json${queryParams ? `?${queryParams}` : ''}`
   );
