@@ -16,7 +16,19 @@ export async function getAllEvents(queryParams?: string): Promise<IEvent[]> {
 }
 
 export async function getFeaturedEvents(): Promise<IEvent[]> {
-  const featuredEvents = await getAllEvents('orderBy="isFeatured"&startAt=true');
+  const featuredEvents = await getAllEvents(
+    'orderBy="isFeatured"&startAt=true'
+  );
 
   return featuredEvents;
+}
+
+export async function getEventById(eventId: string): Promise<IEvent> {
+  const response = await fetch(`${API_URL}/events/${eventId}.json`);
+  const data = await response.json();
+
+  return {
+    id: eventId,
+    ...data,
+  }
 }
