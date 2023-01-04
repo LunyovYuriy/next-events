@@ -1,9 +1,7 @@
 import EventsList from '../../components/EventsList/EventsList';
-import { getFeaturedEvents } from '../../mocks/mock-data';
+import IHome from './interfaces/IHome';
 
-function HomeView() {
-  const featuredEvents = getFeaturedEvents();
-
+function HomeView({ featuredEvents }: IHome) {
   return <EventsList list={featuredEvents} />;
 }
 

@@ -21,7 +21,7 @@ function EventItem({ event }: IEventItem) {
       <Image
         width={300}
         height={300}
-        src={`/${image}`}
+        src={image}
         alt={title}
         className={classes.image}
       />

@@ -1,0 +1,1 @@
+export const API_URL = 'https://next-course-4b49d-default-rtdb.europe-west1.firebasedatabase.app/';
