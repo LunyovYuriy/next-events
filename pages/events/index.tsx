@@ -2,7 +2,7 @@ import { getAllEvents } from '../../src/helpers/eventsApi';
 import EventsView from '../../src/pages/Events/EventsView';
 import IEvents from '../../src/pages/Events/interfaces/IEvents';
 
-function Events({allEvents}: IEvents) {
+function Events({ allEvents }: IEvents) {
   return <EventsView allEvents={allEvents} />;
 }
 
@@ -12,8 +12,9 @@ export async function getStaticProps() {
   return {
     props: {
       allEvents,
-    }
-  }
+    },
+    revalidate: 60,
+  };
 }
 
 export default Events;
