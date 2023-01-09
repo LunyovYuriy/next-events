@@ -1,15 +1,26 @@
 import { GetServerSidePropsContext } from 'next';
+import Head from 'next/head';
 import { getFilteredEvents } from '../../src/helpers/eventsApi';
 import FilteredEventsView from '../../src/pages/FilteredEvents/FilteredEventsView';
 import IFilteredEvents from '../../src/pages/FilteredEvents/interfaces/IFilteredEvents';
 
-function FilteredEvents({ isDateValid, filteredEvents, readableDate }: IFilteredEvents) {
+function FilteredEvents({
+  isDateValid,
+  filteredEvents,
+  readableDate,
+}: IFilteredEvents) {
   return (
-    <FilteredEventsView
-      isDateValid={isDateValid}
-      filteredEvents={filteredEvents}
-      readableDate={readableDate}
-    />
+    <>
+      <Head>
+        <title>Filtered events</title>
+        <meta name="description" content={`All events for ${readableDate}`} />
+      </Head>
+      <FilteredEventsView
+        isDateValid={isDateValid}
+        filteredEvents={filteredEvents}
+        readableDate={readableDate}
+      />
+    </>
   );
 }
 
