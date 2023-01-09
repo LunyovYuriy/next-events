@@ -12,7 +12,7 @@ function EventDetailView({ event }: IEventDetail) {
         className={classes.cover}
         src={event?.image}
         alt={String(event?.title)}
-        width={300}
+        width={600}
         height={300}
       />
       <EventInfo
