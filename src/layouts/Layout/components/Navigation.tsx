@@ -7,6 +7,9 @@ function Navigation() {
       <li>
         <Link href="/events">All Events</Link>
       </li>
+      <li>
+        <Link href="/feedback">Feedback</Link>
+      </li>
     </ul>
   );
 }

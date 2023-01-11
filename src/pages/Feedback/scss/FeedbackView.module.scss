@@ -1,0 +1,78 @@
+@import '../../../styles/colors';
+
+.root {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 45%;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.label {
+  margin-bottom: 6px;
+}
+
+.input {
+  background-color: $royalBlue;
+  outline: none;
+  border: none;
+  padding: 8px;
+  color: $white;
+  font-size: 16px;
+}
+
+.submit {
+  margin-top: 16px;
+  background-color: $royalBlue;
+  outline: none;
+  border: none;
+  padding: 8px;
+  color: $white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all .2s;
+
+  &:hover {
+    background-color: lighten($royalBlue, 5%);
+  }
+}
+
+.feedbacksContainer {
+  flex-basis: 45%;
+}
+
+.feedbacksList {
+  margin-top: 8px;
+  list-style: none;
+}
+
+.feedbackItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+  padding: 8px;
+  background-color: $royalBlue;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.feedbackEmail {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.feedbackText {
+  font-size: 14px;
+}
