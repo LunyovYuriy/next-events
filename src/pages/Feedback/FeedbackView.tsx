@@ -5,6 +5,7 @@ function FeedbackView({
   formValues,
   setFieldValue,
   onSubmit,
+  onLoad,
   feedbacks,
 }: IFeedback) {
   return (
@@ -57,6 +58,7 @@ function FeedbackView({
               <li key={feedback.id} className={classes.feedbackItem}>
                 <span className={classes.feedbackEmail}>{feedback.email}</span>
                 <span className={classes.feedbackText}>{feedback.text}</span>
+                <button onClick={() => onLoad(feedback.id)}>Get detail</button>
               </li>
             ))}
           </ul>

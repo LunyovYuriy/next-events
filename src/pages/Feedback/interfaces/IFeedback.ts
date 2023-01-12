@@ -9,5 +9,6 @@ export default interface IFeedback {
   };
   setFieldValue: ({ fieldName, value }: ISetFieldValueParams) => void;
   onSubmit: (event: React.FormEvent) => void;
+  onLoad: (feedbackId: string) => void;
   feedbacks: IFeedbacks[],
 }

@@ -9,7 +9,7 @@ const feedbackFilePath = path.join(
   'feedback.json'
 );
 
-function extractFeedback() {
+export function extractFeedback() {
   const fileData = fs.readFileSync(feedbackFilePath);
   const data = JSON.parse(String(fileData));
 

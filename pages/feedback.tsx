@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import FeedbackView from '../src/pages/Feedback/FeedbackView';
 import IFeedbacks from '../src/pages/Feedback/interfaces/IFeedbacks';
 import ISetFieldValueParams from '../src/pages/Feedback/interfaces/ISetFieldValueParams';
+import { extractFeedback } from './api/feedback';
 
-function Feedback() {
-  const [feedbacks, setFeedbacks] = useState<IFeedbacks[]>([]);
+function Feedback({ feedbackItems }: { feedbackItems: IFeedbacks[] }) {
+  const [feedbacks, setFeedbacks] = useState<IFeedbacks[]>(feedbackItems);
   const [formState, setFormState] = useState({
     email: '',
     text: '',
@@ -49,15 +50,18 @@ function Feedback() {
     [formState.email, formState.text]
   );
 
-  const loadFeedbacks = useCallback(() => {
-    fetch('/api/feedback')
+  const loadFeedback = (feedbackId: string) => {
+    fetch(`/api/feedback/${feedbackId}`)
       .then((response) => response.json())
-      .then((data) => setFeedbacks(data.feedbacks));
-  }, []);
-
-  useEffect(() => {
-    loadFeedbacks();
-  }, [loadFeedbacks]);
+      .then((data) => {
+        alert(
+          'Feedback Detail:' +
+            `\nID: ${data.feedback.id}` +
+            `\nEMAIL: ${data.feedback.email}` +
+            `\nTEXT: ${data.feedback.text}`
+        );
+      });
+  };
 
   return (
     <FeedbackView
@@ -65,8 +69,18 @@ function Feedback() {
       feedbacks={feedbacks}
       setFieldValue={setFieldValue}
       onSubmit={submitHandler}
+      onLoad={loadFeedback}
     />
   );
+}
+
+export async function getStaticProps() {
+  const feedbackItems = extractFeedback();
+  return {
+    props: {
+      feedbackItems,
+    },
+  };
 }
 
 export default Feedback;
