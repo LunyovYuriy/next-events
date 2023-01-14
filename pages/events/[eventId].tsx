@@ -12,7 +12,7 @@ function EventDetail({ event }: IEventDetail) {
         <title>{event.title}</title>
         <meta name="description" content={event.description} />
       </Head>
-      <EventDetailView event={event} />;
+      <EventDetailView event={event} />
     </>
   );
 }

@@ -22,27 +22,27 @@
 }
 
 .input {
-  background-color: $royalBlue;
+  background-color: $secondary;
   outline: none;
   border: none;
   padding: 8px;
-  color: $white;
+  color: $cWhite;
   font-size: 16px;
 }
 
 .submit {
   margin-top: 16px;
-  background-color: $royalBlue;
+  background-color: $secondary;
   outline: none;
   border: none;
   padding: 8px;
-  color: $white;
+  color: $cWhite;
   font-size: 16px;
   cursor: pointer;
   transition: all .2s;
 
   &:hover {
-    background-color: lighten($royalBlue, 5%);
+    background-color: lighten($secondary, 5%);
   }
 }
 
@@ -60,7 +60,7 @@
   flex-direction: column;
   margin-bottom: 8px;
   padding: 8px;
-  background-color: $royalBlue;
+  background-color: $secondary;
 
   &:last-child {
     margin-bottom: 0;

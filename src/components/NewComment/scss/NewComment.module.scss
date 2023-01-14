@@ -1,0 +1,32 @@
+@import '../../../styles/colors';
+
+.form {
+  background-color: $secondary;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 16px;
+}
+
+.formControl {
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.button {
+  width: 100%;
+  justify-content: center;
+}

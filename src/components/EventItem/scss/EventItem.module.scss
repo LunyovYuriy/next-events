@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 24px;
-  background-color: $royalBlue;
+  background-color: $secondary;
 
   @include mediaMedium() {
     flex-direction: column;
@@ -15,7 +15,7 @@
 .image {
   object-fit: contain;
   width: 300px;
-  background-color: lighten($royalBlue, $amount: 5%);
+  background-color: lighten($secondary, $amount: 5%);
   @include mediaMedium() {
     width: 100%;
     height: auto;

@@ -1,6 +1,15 @@
-$white: #FFF;
-$black: #000;
-$mulledWine: #453C67;
-$royalBlue: #6D67E4;
-$shakespeare: #46C2CB;
-$texas: #F2F7A1;
+/* Colors palette */
+$cMulledWine: #453C67;
+$cRoyalBlue: #6D67E4;
+$cShakespeare: #46C2CB;
+$cWhite: #FFF;
+$cBlack: #000;
+$cTexas: #F2F7A1;
+$cRedOrange: #ff3333;
+
+/* Colors */
+$main: $cMulledWine;
+$secondary: $cRoyalBlue;
+$controlsMain: $cShakespeare;
+$errors: $cRedOrange;
+

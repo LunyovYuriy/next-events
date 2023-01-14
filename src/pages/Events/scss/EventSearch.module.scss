@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  background-color: $royalBlue;
+  background-color: $secondary;
   padding: 8px 16px;
   margin-bottom: 16px;
 }
@@ -27,8 +27,8 @@
 .formSelect {
   width: 100%;
   padding: 5px;
-  background-color: $shakespeare;
-  color: $white;
+  background-color: $controlsMain;
+  color: $cWhite;
   border: none;
   outline: none;
   font-size: 16px;

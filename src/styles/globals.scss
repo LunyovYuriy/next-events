@@ -10,8 +10,8 @@ body {
 }
 
 body {
-  background-color: $mulledWine;
-  color: $white;
+  background-color: $main;
+  color: $cWhite;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -45,12 +45,16 @@ ul {
 .input-main {
   width: 100%;
   padding: 5px 8px;
-  background-color: $shakespeare;
-  color: $white;
+  background-color: $controlsMain;
+  color: $cWhite;
   border: none;
   outline: none;
   font-size: 16px;
   &::placeholder {
     color: rgba(255, 255, 255, 0.8);
   }
+}
+
+.error-text {
+  color: $errors;
 }
