@@ -1,12 +1,12 @@
 import { API_URL } from '../constants/api';
 import IEvent from '../interfaces/IEvent';
 import IEventDateFilter from '../interfaces/IEventDateFilter';
+import apiRequest from './api';
 
 export async function getAllEvents(queryParams?: string): Promise<IEvent[]> {
-  const response = await fetch(
+  const data = await apiRequest.get(
     `${API_URL}/events.json${queryParams ? `?${queryParams}` : ''}`
   );
-  const data = await response.json();
 
   const events = Object.keys(data).map((key) => ({
     id: key,
@@ -25,8 +25,7 @@ export async function getFeaturedEvents(): Promise<IEvent[]> {
 }
 
 export async function getEventById(eventId: string): Promise<IEvent> {
-  const response = await fetch(`${API_URL}/events/${eventId}.json`);
-  const data = await response.json();
+  const data = await apiRequest.get(`${API_URL}/events/${eventId}.json`);
 
   return {
     id: eventId,

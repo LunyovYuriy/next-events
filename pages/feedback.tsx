@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import apiRequest from '../src/helpers/api';
 import FeedbackView from '../src/pages/Feedback/FeedbackView';
 import IFeedbacks from '../src/pages/Feedback/interfaces/IFeedbacks';
 import ISetFieldValueParams from '../src/pages/Feedback/interfaces/ISetFieldValueParams';
@@ -31,28 +32,19 @@ function Feedback({ feedbackItems }: { feedbackItems: IFeedbacks[] }) {
     (event: React.FormEvent) => {
       event.preventDefault();
 
-      fetch('/api/feedback', {
-        method: 'POST',
-        body: JSON.stringify({
-          email: formState.email,
+      apiRequest.post('/api/feedback', {
+        email: formState.email,
           text: formState.text,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      }).then((data) => {
+        clearFormState();
+        setFeedbacks((prevFeedbacks) => [...prevFeedbacks, data.feedback]);
       })
-        .then((response) => response.json())
-        .then((data) => {
-          clearFormState();
-          setFeedbacks((prevFeedbacks) => [...prevFeedbacks, data.feedback]);
-        });
     },
     [formState.email, formState.text]
   );
 
   const loadFeedback = (feedbackId: string) => {
-    fetch(`/api/feedback/${feedbackId}`)
-      .then((response) => response.json())
+    apiRequest.get(`/api/feedback/${feedbackId}`)
       .then((data) => {
         alert(
           'Feedback Detail:' +
@@ -60,7 +52,7 @@ function Feedback({ feedbackItems }: { feedbackItems: IFeedbacks[] }) {
             `\nEMAIL: ${data.feedback.email}` +
             `\nTEXT: ${data.feedback.text}`
         );
-      });
+      })
   };
 
   return (
@@ -84,5 +76,3 @@ export async function getStaticProps() {
 }
 
 export default Feedback;
-
-// NEXT - 154

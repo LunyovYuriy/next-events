@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import apiRequest from '../../helpers/api';
 import Button from '../Button/Button';
 import classes from './scss/NewsLetterRegistration.module.scss';
 
@@ -8,7 +9,11 @@ function NewsLetterRegistration() {
   const registrationHandler = (event: FormEvent) => {
     event.preventDefault();
 
-    // fetch POST user email
+    apiRequest.post('/api/newsletter', {
+      email,
+    }).then((data) => {
+      console.log(data)
+    });
   };
 
   return (
