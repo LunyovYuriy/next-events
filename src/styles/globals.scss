@@ -41,3 +41,16 @@ ul {
   margin: 0 auto;
   padding: 16px;
 }
+
+.input-main {
+  width: 100%;
+  padding: 5px 8px;
+  background-color: $shakespeare;
+  color: $white;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
