@@ -1,10 +1,16 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from 'next';
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
-  const {email} = req.body;
-
   if (req.method === 'POST') {
-    console.log(email);
+    const { email } = req.body;
+
+    if (!email || !email.includes('@')) {
+      res.status(422).json({
+        message: 'Invalid email address.',
+      });
+      return;
+    }
+
     res.status(201).json({
       message: 'success',
       email,

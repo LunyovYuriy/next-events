@@ -25,7 +25,7 @@ function EventDetailView({ event }: IEventDetail) {
           location={event?.location}
         />
       </div>
-      <Comments />
+      <Comments eventId={event.id} />
     </>
   );
 }

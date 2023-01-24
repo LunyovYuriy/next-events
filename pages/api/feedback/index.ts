@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 import fs from 'fs';
+import { v4 as uuid } from 'uuid';
 
 const feedbackFilePath = path.join(
   process.cwd(),
@@ -21,7 +22,7 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
     const { email, text } = req.body;
 
     const newFeedback = {
-      id: new Date().toISOString(),
+      id: uuid(),
       email,
       text,
     };

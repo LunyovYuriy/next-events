@@ -1,17 +1,19 @@
 import { FormEvent, useState } from 'react';
 import Button from '../Button/Button';
+import IComments from '../Comments/interfaces/IComments';
 import classes from './scss/NewComment.module.scss';
+import apiRequest from '../../helpers/api';
 
-function NewComment() {
+function NewComment({ eventId }: IComments) {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const [comment, setComment] = useState('');
+  const [text, setText] = useState('');
   const [error, setError] = useState('');
 
   const validate = () => {
     let result = true;
 
-    if (!email.length && !name.length && !comment.length) {
+    if (!email.length && !name.length && !text.length) {
       setError('Please fill out the fields');
       result = false;
     }
@@ -22,7 +24,7 @@ function NewComment() {
     } else if (!name.length) {
       setError('Please enter your name');
       result = false;
-    } else if (!comment.length) {
+    } else if (!text.length) {
       setError('Please enter your comment');
       result = false;
     }
@@ -35,7 +37,15 @@ function NewComment() {
 
     const isValid = validate();
     if (isValid) {
-      // fetch POST data
+      apiRequest
+        .post(`/api/comments/${eventId}/`, {
+          email,
+          name,
+          text,
+        })
+        .then((data) => {
+          console.log(data);
+        });
     }
   };
 
@@ -75,8 +85,8 @@ function NewComment() {
           id="comment"
           rows={5}
           className="input-main"
-          value={comment}
-          onChange={(event) => setComment(event.target.value)}
+          value={text}
+          onChange={(event) => setText(event.target.value)}
         ></textarea>
       </div>
       {error && <p className="error-text">{error}</p>}
