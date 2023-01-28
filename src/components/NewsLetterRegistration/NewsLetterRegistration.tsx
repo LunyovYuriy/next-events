@@ -1,3 +1,4 @@
+import { FetchEventResult } from 'next/dist/server/web/types';
 import { FormEvent, useState } from 'react';
 import apiRequest from '../../helpers/api';
 import Button from '../Button/Button';
@@ -11,9 +12,10 @@ function NewsLetterRegistration() {
 
     apiRequest.post('/api/newsletter', {
       email,
-    }).then((data) => {
-      console.log(data)
-    });
+    }).then(() => {
+      alert("Success");
+      setEmail('');
+    })
   };
 
   return (

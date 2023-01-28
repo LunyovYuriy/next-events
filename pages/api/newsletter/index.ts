@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { connectMongoDB } from '../../../src/helpers/mongodb';
 
-function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { email } = req.body;
 
@@ -10,6 +11,14 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
       });
       return;
     }
+
+    const client = await connectMongoDB();
+
+    const db = client.db('events');
+    await db.collection('newsletter').insertOne({
+      email,
+    });
+    client.close();
 
     res.status(201).json({
       message: 'success',

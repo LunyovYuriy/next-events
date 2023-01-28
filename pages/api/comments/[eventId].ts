@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { v4 as uuid } from 'uuid';
+import { connectMongoDB } from '../../../src/helpers/mongodb';
 
-function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const client = await connectMongoDB();
   const { eventId } = req.query;
 
   if (req.method === 'POST') {
@@ -13,33 +14,36 @@ function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     const comment = {
-      id: uuid(),
       email,
       name,
       text,
+      eventId,
     };
 
-    res.status(201).json({ message: 'success', comment });
+    const db = client.db('events');
+    const result = await db.collection('comments').insertOne(comment);
+
+    const resultComment = {
+      _id: result.insertedId,
+      ...comment,
+    };
+
+    res.status(201).json({ message: 'success', resultComment });
   }
 
   if (req.method === 'GET') {
-    const dummyList = [
-      {
-        id: 'c1',
-        name: 'Yuriy',
-        text: 'Hello GET request world',
-        email: 'lunyov.yu@gmail.com',
-      },
-      {
-        id: 'c2',
-        name: 'Ksenia',
-        text: 'Hello world!',
-        email: 'ksuchum@gmail.com',
-      },
-    ];
+    const db = client.db('events');
 
-    res.status(200).json({ comments: dummyList });
+    const documents = await db
+      .collection('comments')
+      .find()
+      .sort({ _id: -1 })
+      .toArray();
+
+    res.status(200).json({ comments: documents });
   }
+
+  client.close();
 }
 
 export default handler;

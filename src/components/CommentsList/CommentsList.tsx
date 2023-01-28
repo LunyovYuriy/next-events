@@ -5,8 +5,8 @@ import classes from './scss/CommentsList.module.scss';
 function CommentsList({ items }: ICommentsList) {
   return (
     <>
-      {items.map(({ id, name, email, text }: IComment) => (
-        <div className={classes.container} key={id}>
+      {items.map(({ _id, name, email, text }: IComment) => (
+        <div className={classes.container} key={_id}>
           <div className={classes.row}>
             <strong>{name}</strong>
             <span> - </span>

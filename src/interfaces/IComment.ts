@@ -1,5 +1,6 @@
 export default interface IComment {
-  id: string;
+  _id?: string;
+  eventId?: string | string[];
   name: string;
   email: string;
   text: string;
