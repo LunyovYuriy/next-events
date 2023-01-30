@@ -6,16 +6,24 @@ const mutationRequest = (method: string, url: string, body: {}) =>
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => response.json())
-    .then((data) => data)
-    .catch((error) => error);
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(`${response.status} - ${response?.statusText}`);
+    })
+    .then((data) => data);
 
 const apiRequest = {
   get(url: string) {
     return fetch(url)
-      .then((response) => response.json())
-      .then((data) => data)
-      .catch((error) => error);
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error(`${response.status} - ${response?.statusText}`);
+      })
+      .then((data) => data);
   },
   post(url: string, body: {}) {
     return mutationRequest('POST', url, body);

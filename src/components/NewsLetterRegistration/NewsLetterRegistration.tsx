@@ -15,6 +15,8 @@ function NewsLetterRegistration() {
     }).then(() => {
       alert("Success");
       setEmail('');
+    }).catch((error) => {
+      alert(error)
     })
   };
 

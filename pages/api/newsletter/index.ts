@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { connectMongoDB } from '../../../src/helpers/mongodb';
+import { connectMongoDB, insertDocument } from '../../../src/helpers/mongodb';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
@@ -12,12 +12,23 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       return;
     }
 
-    const client = await connectMongoDB();
+    let client;
 
-    const db = client.db('events');
-    await db.collection('newsletter').insertOne({
-      email,
-    });
+    try {
+      client = await connectMongoDB();
+    } catch (error) {
+      res.status(500).json({ message: 'Connecting to the database failed!' });
+      return;
+    }
+
+    try {
+      await insertDocument(client, 'newsletter', {
+        email,
+      });
+    } catch (error) {
+      res.status(500).json({ message: 'Inserting data failed' });
+    }
+
     client.close();
 
     res.status(201).json({

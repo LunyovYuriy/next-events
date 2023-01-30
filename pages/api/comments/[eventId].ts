@@ -1,8 +1,20 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { connectMongoDB } from '../../../src/helpers/mongodb';
+import {
+  connectMongoDB,
+  getAllDocuments,
+  insertDocument,
+} from '../../../src/helpers/mongodb';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const client = await connectMongoDB();
+  let client;
+
+  try {
+    client = await connectMongoDB();
+  } catch (error) {
+    res.status(500).json({ message: 'Connecting to the database failed!' });
+    return;
+  }
+
   const { eventId } = req.query;
 
   if (req.method === 'POST') {
@@ -10,6 +22,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
     if (!email.includes('@') || !name.trim() || !text.trim()) {
       res.status(422).json({ message: 'Invalid input.' });
+      client.close();
       return;
     }
 
@@ -20,27 +33,28 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       eventId,
     };
 
-    const db = client.db('events');
-    const result = await db.collection('comments').insertOne(comment);
+    try {
+      const result = await insertDocument(client, 'comments', comment);
 
-    const resultComment = {
-      _id: result.insertedId,
-      ...comment,
-    };
+      const resultComment = {
+        _id: result.insertedId,
+        ...comment,
+      };
 
-    res.status(201).json({ message: 'success', resultComment });
+      res.status(201).json({ message: 'success', resultComment });
+    } catch (error) {
+      res.status(500).json({ message: 'Inserting data failed' });
+    }
   }
 
   if (req.method === 'GET') {
-    const db = client.db('events');
+    try {
+      const documents = await getAllDocuments(client, 'comments');
 
-    const documents = await db
-      .collection('comments')
-      .find()
-      .sort({ _id: -1 })
-      .toArray();
-
-    res.status(200).json({ comments: documents });
+      res.status(200).json({ comments: documents });
+    } catch (error) {
+      res.status(500).json({ message: 'Unable to get comments' });
+    }
   }
 
   client.close();
