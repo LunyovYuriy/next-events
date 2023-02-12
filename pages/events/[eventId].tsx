@@ -21,11 +21,11 @@ export async function getStaticPaths() {
   const allEvents = await getAllEvents();
 
   return {
-    paths: allEvents.map((event) => ({
+    paths: allEvents ? allEvents?.map((event) => ({
       params: {
         eventId: event.id,
       },
-    })),
+    })) : null,
     fallback: false,
   };
 }

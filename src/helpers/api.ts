@@ -21,6 +21,7 @@ const apiRequest = {
         if (response.ok) {
           return response.json();
         }
+
         throw new Error(`${response.status} - ${response?.statusText}`);
       })
       .then((data) => data);

@@ -1,23 +1,42 @@
 import { FetchEventResult } from 'next/dist/server/web/types';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
+import NotificationContext from '../../context/NotificationContext/NotificationContext';
 import apiRequest from '../../helpers/api';
 import Button from '../Button/Button';
 import classes from './scss/NewsLetterRegistration.module.scss';
 
 function NewsLetterRegistration() {
   const [email, setEmail] = useState('');
+  const { showNotification } = useContext(NotificationContext);
 
   const registrationHandler = (event: FormEvent) => {
     event.preventDefault();
 
-    apiRequest.post('/api/newsletter', {
-      email,
-    }).then(() => {
-      alert("Success");
-      setEmail('');
-    }).catch((error) => {
-      alert(error)
-    })
+    showNotification({
+      title: 'Signing up...',
+      message: 'Registering for newsletter',
+      status: 'pending',
+    });
+
+    apiRequest
+      .post('/api/newsletter', {
+        email,
+      })
+      .then(() => {
+        showNotification({
+          title: 'Success!',
+          message: 'Signed up successfully',
+          status: 'success',
+        });
+        setEmail('');
+      })
+      .catch((error) => {
+        showNotification({
+          title: 'Error!',
+          message: error?.message || 'Something went wrong',
+          status: 'error',
+        });
+      });
   };
 
   return (
