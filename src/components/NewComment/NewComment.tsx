@@ -1,14 +1,23 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import Button from '../Button/Button';
 import IComments from '../Comments/interfaces/IComments';
 import classes from './scss/NewComment.module.scss';
 import apiRequest from '../../helpers/api';
+import NotificationContext from '../../context/NotificationContext/NotificationContext';
 
-function NewComment({ eventId }: IComments) {
+function NewComment({ eventId, addComment }: IComments) {
+  const { showNotification } = useContext(NotificationContext);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [text, setText] = useState('');
   const [error, setError] = useState('');
+
+  const clearForm = () => {
+    setEmail('');
+    setName('');
+    setText('');
+    setError('');
+  };
 
   const validate = () => {
     let result = true;
@@ -37,6 +46,11 @@ function NewComment({ eventId }: IComments) {
 
     const isValid = validate();
     if (isValid) {
+      showNotification({
+        title: 'Posting...',
+        message: 'Adding your comment',
+        status: 'pending',
+      });
       apiRequest
         .post(`/api/comments/${eventId}/`, {
           email,
@@ -44,7 +58,23 @@ function NewComment({ eventId }: IComments) {
           text,
         })
         .then((data) => {
-          console.log(data);
+          showNotification({
+            title: 'Success!',
+            message: 'Your comment has been added',
+            status: 'success',
+          });
+          const {resultComment} = data || {};
+
+          addComment(resultComment);
+          clearForm();
+        })
+        .catch(() => {
+          showNotification({
+            title: 'Error!',
+            message:
+              'An error occurred during posting your comment, please try again later',
+            status: 'error',
+          });
         });
     }
   };
