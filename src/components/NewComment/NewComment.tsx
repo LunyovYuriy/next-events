@@ -63,9 +63,11 @@ function NewComment({ eventId, addComment }: IComments) {
             message: 'Your comment has been added',
             status: 'success',
           });
-          const {resultComment} = data || {};
+          const { resultComment } = data || {};
 
-          addComment(resultComment);
+          if (addComment) {
+            addComment(resultComment);
+          }
           clearForm();
         })
         .catch(() => {
@@ -120,7 +122,7 @@ function NewComment({ eventId, addComment }: IComments) {
         ></textarea>
       </div>
       {error && <p className="error-text">{error}</p>}
-      <Button label="Submit" type="submit" className={classes.button} />
+      <Button label="Submit" type="submit" className={classes.button}/>
     </form>
   );
 }
